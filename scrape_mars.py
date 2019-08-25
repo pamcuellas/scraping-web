@@ -19,10 +19,26 @@ import os
 # In[2]:
 
 def init_browser():
+
+    options = webdriver.ChromeOptions()
+    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    options.add_argument('--headless')
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument("--no-sandbox")
+    driver = return webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=options)
+    return driver
+
+    # chrome_bin = os.environ.get('GOOGLE_CHROME_BIN', "chromedriver")
+    # options.add_argument("--disable-gpu")
+    # options.add_argument('headless')
+    # options.add_argument('window-size=1200x600')
+    # return webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=options)
+
+
     # /usr/local/bin/chromedriver
     # DFDFDD
-    driver = webdriver.Chrome('./')  # Optional argument, if not specified will search path.
-    return  driver.get('http://www.google.com/xhtml');
+    # driver = webdriver.Chrome('./')  # Optional argument, if not specified will search path.
+    # return  driver.get('http://www.google.com/xhtml');
 
     # CHROMEDRIVER_PATH = "/app/.apt/usr/bin/google-chrome"
     # # CHROMEDRIVER_PATH = "/app/.chromedriver/bin/chromedriver"
