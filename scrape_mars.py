@@ -1,7 +1,12 @@
 #!/usr/bin/env python
+# coding: utf-8
+
+# # <h1 style="color: purple;">Step 1 - Scraping</h1>
+
 # ### NASA Mars News
 
 # In[1]:
+
 
 # Import Dependencies
 from splinter import Browser
@@ -79,6 +84,7 @@ def scrape():
     print("#################################### passo 01")
 
     # In[6]:
+
 
     # Use splinter to navigate the site and find the image url for the current Featured 
     # Mars Image and assign the url string to a variable called featured_image_url.
