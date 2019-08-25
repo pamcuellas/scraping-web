@@ -61,7 +61,6 @@ def scrape():
     # Get the first paragraph
     last_p = lst_p.find_all("p")[0]
     last_p = last_p.text
-    last_p = last_p.replace("'","")
 
     json_data["last_title"] = last_title
     json_data["last_p"] = last_p
@@ -77,15 +76,12 @@ def scrape():
 
     # In[6]:
 
-    # Get the figure ID.
-    carousel_item = soup.find("article", class_="carousel_item")
-    footer = carousel_item.find("footer")
-    id_fig = footer.find("a")["data-link"]
-    id_fig = id_fig.split("=")[1]
 
     # Use splinter to navigate the site and find the image url for the current Featured 
     # Mars Image and assign the url string to a variable called featured_image_url.
-    featured_image_url = "https://www.jpl.nasa.gov/spaceimages/images/largesize/" + id_fig + "_hires.jpg"
+    # Get the Image URL
+    carousel_item = soup.find('article', class_="carousel_item")['style']
+    featured_image_url = 'https://www.jpl.nasa.gov' + carousel_item.split("'")[1]
 
     # print("The URL is {}".format(featured_image_url))
 
@@ -123,12 +119,20 @@ def scrape():
     tables = pd.read_html(url)
     df = tables[1]
     df.rename(columns={0:"Description",1:"Value"}, inplace=True)
-    df.set_index("Description", inplace=True)
 
     # In[9]:
 
     # Use Pandas to convert the data to a HTML table string.
-    html_table = df.to_html(escape=False, justify="left", classes="table table-striped table-bordered table-sm")
+    html_temp = df.to_html(index=False, escape=False, justify="left", classes="table table-striped table-bordered table-sm")
+
+    # Change the first column from td to th.
+    html_table = ""
+    for row in html_temp.split("<tr>"): 
+        row = row.replace("<td>","<th>",1)
+        row = row.replace("</td>","</th>",1)
+        html_table = html_table + "<tr>" + row
+    html_table = html_table.replace("<tr>","",1)
+
     json_data["html_table"] = html_table
 
     # ### Mars Hemispheres
@@ -139,11 +143,11 @@ def scrape():
     # to obtain high resolution images for each of Mar"s hemispheres.
     url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
     hemisphere_image_urls =[]
-
-    # Get text links to click
     browser.visit(url)
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
+
+    # Get text links to click
     items = soup.find_all("div", class_="description")
     lst_text =[]
     for item in items:
@@ -155,7 +159,7 @@ def scrape():
         html = browser.html
         soup = BeautifulSoup(html, "html.parser")
         browser.click_link_by_partial_text(lst_text[i])
-                
+
         html = browser.html
         soup = BeautifulSoup(html, "html.parser")
         
@@ -167,11 +171,16 @@ def scrape():
         title = soup.title.text
         title = title.split("|")[0]
         title = title.replace("Enhanced","")
-
+        title = title.strip()
         # Append the dictionary with the image url string and the hemisphere title to a list. 
         hemisphere_image_urls.append({"title":title, "img_url": img_url})     
 
+    # Add list of images URL and title to json_data 
     json_data["hemisphere_image_urls"] = hemisphere_image_urls
+
+    # Close the browser window
+    browser.quit()
+
     return json_data
 
 
