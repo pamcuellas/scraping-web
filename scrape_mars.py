@@ -37,7 +37,7 @@ def scrape():
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
 
-    random_num = randint(1, 40)
+    random_num = randint(0, 39)
     # Get the list of news 
     ul_list_news = soup.find("ul", class_="item_list")
     # Get the random news
