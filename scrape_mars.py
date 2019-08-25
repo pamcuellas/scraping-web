@@ -50,8 +50,7 @@ def scrape():
 
     # Go to the news page
     url = url.replace("/news","",1) + link_latest_news
-
-    print("#################################### URL " + url)
+    json_data['link_news'] = url
 
     browser.visit(url)
     html = browser.html
