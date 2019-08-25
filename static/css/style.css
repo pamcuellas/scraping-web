@@ -1,5 +1,8 @@
 @media screen and (max-width: 600px) {
-	.h2 {
+	h2 {
 		color:red;
-	}
+    }
+    body {
+        background-color: aqua;
+    }
 }
