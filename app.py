@@ -2,8 +2,7 @@
 from flask import Flask, render_template, redirect
 from flask_pymongo import PyMongo
 import scrape_mars
-from dbconfig import dbname, dbuser, psswd, host, parameters
-
+# from dbconfig import dbname, dbuser, psswd, host, parameters
 
 app = Flask(__name__)
 
@@ -12,8 +11,11 @@ app = Flask(__name__)
 # mongo = PyMongo(app)
 
 # Or set inline
+
 # mongodb+srv://mongorootuser:<password>@cluster0-mcbfw.mongodb.net/test?retryWrites=true&w=majority
-connection_string ='mongodb+srv://' + dbuser + ':' + psswd + host + '/' + dbname + "?" + parameters 
+# connection_string ='mongodb+srv://' + dbuser + ':' + psswd + host + '/' + dbname + "?" + parameters
+connection_string ='mongodb+srv://' + "mongorootuser" + ':' + "7cU7KqmwItQlBJi7" + "@cluster0-mcbfw.mongodb.net" + '/' + "scrapeweb" + "?" + 'retryWrites=true&w=majority' 
+  
 mongo = PyMongo(app, uri=connection_string)
 
 @app.route("/")
