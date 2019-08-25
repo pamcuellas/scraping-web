@@ -207,7 +207,7 @@ def scrape():
         # Append the dictionary with the image url string and the hemisphere title to a list. 
         hemisphere_image_urls.append({"title":title, "img_url": img_url})     
         print("#################################### passo 5")
-
+        break
 
     print("#################################### passo 6")
 
