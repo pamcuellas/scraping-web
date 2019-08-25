@@ -17,8 +17,9 @@ import pandas as pd
 # In[2]:
 
 def init_browser():
-
-    executable_path = {"executable_path": "/app/.apt/usr/bin/google-chrome"}
+    # /usr/local/bin/chromedriver
+    
+    executable_path = {"executable_path": "/usr/bin/google-chrome"}
     return Browser("chrome", **executable_path, headless=False)
 
     # executable_path = {"executable_path": "chromedriver.exe"}
