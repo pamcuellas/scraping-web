@@ -314,7 +314,7 @@
             {% for item in mars.hemisphere_image_urls %}
             <div class="col-lg-6 col-12">
               <div class="img-thumbnail mb-4 rounded">
-                  <img class="w-100" src="{item.img_url}}"  alt="{item.title}}">
+                  <img class="w-100" src="{{item['img_url']}}"  alt="{{item['title']}}">
                   <h4 class="m-3">{{item['title']}}</h4>
               </div>
             </div>
