@@ -12,11 +12,11 @@
 from splinter import Browser
 from bs4 import BeautifulSoup
 import pandas as pd
+from random import *
 
 # In[2]:
 
 def init_browser():
-
     executable_path = {"executable_path": "/app/.chromedriver/bin/chromedriver"}
     return Browser("chrome", **executable_path, headless=False)
 
@@ -37,12 +37,13 @@ def scrape():
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
 
+    random_num = randint(1, 40)
     # Get the list of news 
     ul_list_news = soup.find("ul", class_="item_list")
-    # Get the last news
-    li_last_news = ul_list_news.find_all("li")[0]
-    # Get the link for the last news.
-    link_latest_news = li_last_news.find("a")["href"]
+    # Get the random news
+    li_random_news = ul_list_news.find_all("li")[random_num]
+    # Get the link for the random news.
+    link_latest_news = li_random_news.find("a")["href"]
     # print(link_latest_news)
 
     # In[3]:
@@ -55,8 +56,6 @@ def scrape():
     browser.visit(url)
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
-
-    print("#################################### passo 0")
 
     # In[4]:
 
@@ -81,10 +80,7 @@ def scrape():
     browser.visit(url)
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
-    print("#################################### passo 01")
-
     # In[6]:
-
 
     # Use splinter to navigate the site and find the image url for the current Featured 
     # Mars Image and assign the url string to a variable called featured_image_url.
@@ -106,7 +102,6 @@ def scrape():
     browser.visit(url)
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
-    print("#################################### passo 2")
 
     # Remove tag a from tag p (Mars Weather).
     for a in soup.find_all("a", {'class':'twitter-timeline-link u-hidden'}): 
@@ -129,7 +124,6 @@ def scrape():
     tables = pd.read_html(url)
     df = tables[1]
     df.rename(columns={0:"Description",1:"Value"}, inplace=True)
-    print("#################################### passo 3")
 
     # In[9]:
 
