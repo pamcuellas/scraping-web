@@ -10,6 +10,7 @@
 
 # Import Dependencies
 from splinter import Browser
+from selenium import webdriver
 from splinter.exceptions import ElementDoesNotExist
 from bs4 import BeautifulSoup
 import pandas as pd
