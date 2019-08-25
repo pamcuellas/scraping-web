@@ -76,6 +76,8 @@ def scrape():
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
 
+    print("#################################### passo 0")
+
     # In[4]:
 
     # Get the title
@@ -99,6 +101,7 @@ def scrape():
     browser.visit(url)
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
+    print("#################################### passo 01")
 
     # In[6]:
 
@@ -123,6 +126,7 @@ def scrape():
     browser.visit(url)
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
+    print("#################################### passo 2")
 
     # Remove tag a from tag p (Mars Weather).
     for a in soup.find_all("a", {'class':'twitter-timeline-link u-hidden'}): 
@@ -145,6 +149,7 @@ def scrape():
     tables = pd.read_html(url)
     df = tables[1]
     df.rename(columns={0:"Description",1:"Value"}, inplace=True)
+    print("#################################### passo 3")
 
     # In[9]:
 
@@ -172,6 +177,7 @@ def scrape():
     browser.visit(url)
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
+    print("#################################### passo 4")
 
     # Get text links to click
     items = soup.find_all("div", class_="description")
@@ -200,6 +206,10 @@ def scrape():
         title = title.strip()
         # Append the dictionary with the image url string and the hemisphere title to a list. 
         hemisphere_image_urls.append({"title":title, "img_url": img_url})     
+        print("#################################### passo 5")
+
+
+    print("#################################### passo 6")
 
     # Add list of images URL and title to json_data 
     json_data["hemisphere_image_urls"] = hemisphere_image_urls
