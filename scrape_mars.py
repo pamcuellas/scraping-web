@@ -21,7 +21,7 @@ import os
 def init_browser():
     # /usr/local/bin/chromedriver
     # DFDFDD
-    driver = webdriver.Chrome("./")  # Optional argument, if not specified will search path.
+    driver = webdriver.Chrome()  # Optional argument, if not specified will search path.
     return  driver.get('http://www.google.com/xhtml');
 
     # CHROMEDRIVER_PATH = "/app/.apt/usr/bin/google-chrome"
