@@ -21,9 +21,9 @@ import os
 def init_browser():
     # /usr/local/bin/chromedriver
 
-    CHROMEDRIVER_PATH = "/usr/bin/google-chrome"
+    CHROMEDRIVER_PATH = "/app/.apt/usr/bin/google-chrome"
     # CHROMEDRIVER_PATH = "/app/.chromedriver/bin/chromedriver"
-    # /app/.apt/usr/bin/google-chrome
+    # 
     chrome_bin = os.environ.get('GOOGLE_CHROME_BIN', "chromedriver")
     options = webdriver.ChromeOptions()
     options.binary_location = chrome_bin
