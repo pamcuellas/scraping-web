@@ -53,9 +53,10 @@ def scrape():
 
     url = "https://mars.nasa.gov/news/"
     browser.visit(url)
-
+    print("#################################### STEP 1")
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
+    print("#################################### STEP 2")
 
     # Get the list of news 
     ul_list_news = soup.find("ul", class_="item_list")
