@@ -27,8 +27,8 @@ def index():
 def scrape():
     mars = mongo.db.mars
     print("E AQUI *****************************************************************###*")
-    print(mars)
     data = scrape_mars.scrape()
+    print(data)
     print("E AQUI ******************************************************************")
     mars.update({}, data, upsert=True)
     return redirect("/", code=302)
