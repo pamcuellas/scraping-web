@@ -56,7 +56,6 @@ def scrape():
     print("#################################### STEP 1")
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
-    print("#################################### STEP 2")
 
     # Get the list of news 
     ul_list_news = soup.find("ul", class_="item_list")
@@ -70,6 +69,9 @@ def scrape():
 
     # Go to the news page
     url = url.replace("/news","",1) + link_latest_news
+
+    print("#################################### URL " + url)
+
     browser.visit(url)
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
