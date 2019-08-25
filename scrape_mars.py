@@ -20,20 +20,15 @@ import os
 
 def init_browser():
 
-    options = webdriver.ChromeOptions()
-    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    options.add_argument('--headless')
-    options.add_argument('--disable-dev-shm-usage')
-    options.add_argument("--no-sandbox")
-    return webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=options)
+    # # TO WORK WITH SELENIUM
+    # options = webdriver.ChromeOptions()
+    # options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    # options.add_argument('--headless')
+    # options.add_argument('--disable-dev-shm-usage')
+    # options.add_argument("--no-sandbox")
+    # return webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=options)
 
-    # chrome_bin = os.environ.get('GOOGLE_CHROME_BIN', "chromedriver")
-    # options.add_argument("--disable-gpu")
-    # options.add_argument('headless')
-    # options.add_argument('window-size=1200x600')
-    # return webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=options)
-
-
+  
     # /usr/local/bin/chromedriver
     # DFDFDD
     # driver = webdriver.Chrome('./')  # Optional argument, if not specified will search path.
@@ -41,19 +36,9 @@ def init_browser():
 
     # CHROMEDRIVER_PATH = "/app/.apt/usr/bin/google-chrome"
     # # CHROMEDRIVER_PATH = "/app/.chromedriver/bin/chromedriver"
-    # # 
-    # chrome_bin = os.environ.get('GOOGLE_CHROME_BIN', "chromedriver")
-    # options = webdriver.ChromeOptions()
-    # options.binary_location = chrome_bin
-    # options.add_argument("--disable-gpu")
-    # options.add_argument("--no-sandbox")
-    # options.add_argument('headless')
-    # options.add_argument('window-size=1200x600')
-    # return webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=options)
 
-
-    # executable_path = {"executable_path": "/usr/bin/google-chrome"}
-    # return Browser("chrome", **executable_path, headless=False)
+    executable_path = {"executable_path": CHROMEDRIVER_PATH}
+    return Browser("chrome", **executable_path, headless=False)
 
     # executable_path = {"executable_path": "chromedriver.exe"}
     # return Browser("chrome", **executable_path, headless=False)
