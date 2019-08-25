@@ -26,11 +26,9 @@ def index():
 @app.route("/scrape")
 def scrape():
     mars = mongo.db.mars
-    print("E AQUI *****************************************************************###*")
+    print("E AQUI *****************************************************************$$$$$$$$$*")
     data = scrape_mars.scrape()
-    print(data)
     print("E AQUI QUE COMEÇA******************************************************************")
-    data["hemisphere_image_urls"] = scrape_mars.scrape2()
     mars.update({}, data, upsert=True)
     return redirect("/", code=302)
 

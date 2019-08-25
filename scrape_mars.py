@@ -209,8 +209,6 @@ def scrape():
         print("#################################### passo 5")
         break
 
-    print("#################################### passo 6")
-
     # Add list of images URL and title to json_data 
     json_data["hemisphere_image_urls"] = hemisphere_image_urls
 
