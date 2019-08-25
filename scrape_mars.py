@@ -37,7 +37,7 @@ def init_browser():
     # CHROMEDRIVER_PATH = "/app/.apt/usr/bin/google-chrome"
     # # CHROMEDRIVER_PATH = "/app/.chromedriver/bin/chromedriver"
 
-    executable_path = {"executable_path": "CHROMEDRIVER_PATH"}
+    executable_path = {"executable_path": "/app/.chromedriver/bin/chromedriver"}
     return Browser("chrome", **executable_path, headless=False)
 
     # executable_path = {"executable_path": "chromedriver.exe"}
