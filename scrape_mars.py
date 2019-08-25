@@ -172,12 +172,70 @@ def scrape():
 
     # Visit the USGS Astrogeology site here (https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars)
     # to obtain high resolution images for each of Mar"s hemispheres.
+    # url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
+    # hemisphere_image_urls =[]
+    # browser.visit(url)
+    # html = browser.html
+    # soup = BeautifulSoup(html, "html.parser")
+    # print("#################################### passo 4")
+
+    # # Get text links to click
+    # items = soup.find_all("div", class_="description")
+    # lst_text =[]
+    # for item in items:
+    #     lst_text.append(item.h3.text)
+
+    # # Looping to click 
+    # for i in range( len(lst_text) ):
+    #     browser.visit(url)
+    #     html = browser.html
+    #     soup = BeautifulSoup(html, "html.parser")
+    #     browser.click_link_by_partial_text(lst_text[i])
+
+    #     html = browser.html
+    #     soup = BeautifulSoup(html, "html.parser")
+        
+    #     # Get the image URL
+    #     tmp_img_url = soup.find('img',class_="wide-image")["src"]
+    #     img_url = "https://astrogeology.usgs.gov" + tmp_img_url
+
+    #     # Get the title
+    #     title = soup.title.text
+    #     title = title.split("|")[0]
+    #     title = title.replace("Enhanced","")
+    #     title = title.strip()
+    #     # Append the dictionary with the image url string and the hemisphere title to a list. 
+    #     hemisphere_image_urls.append({"title":title, "img_url": img_url})     
+    #     print("#################################### passo 5")
+    #     break
+
+    # print("#################################### passo 6")
+
+    # # Add list of images URL and title to json_data 
+    # json_data["hemisphere_image_urls"] = hemisphere_image_urls
+
+    # Close the browser window
+    browser.quit()
+
+    return json_data
+
+
+
+
+##############################################################################################################################
+
+
+def scrape2():
+    browser = init_browser()
+
+   # Visit the USGS Astrogeology site here (https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars)
+    # to obtain high resolution images for each of Mar"s hemispheres.
     url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
     hemisphere_image_urls =[]
     browser.visit(url)
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
-    print("#################################### passo 4")
+    print("#################################### Starting new function")
 
     # Get text links to click
     items = soup.find_all("div", class_="description")
@@ -207,16 +265,18 @@ def scrape():
         # Append the dictionary with the image url string and the hemisphere title to a list. 
         hemisphere_image_urls.append({"title":title, "img_url": img_url})     
         print("#################################### passo 5")
-        break
 
     print("#################################### passo 6")
 
     # Add list of images URL and title to json_data 
-    json_data["hemisphere_image_urls"] = hemisphere_image_urls
+    # json_data["hemisphere_image_urls"] = hemisphere_image_urls
 
     # Close the browser window
     browser.quit()
 
-    return json_data
+    return hemisphere_image_urls
+
+
+
 
 
