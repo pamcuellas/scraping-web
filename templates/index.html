@@ -296,21 +296,21 @@
         </div>
         <div class="col-lg-4">
           <div class="mt-3" style="border: #fb8992 1px solid">
-            <h4 class="m-3"><a class="text-decoration-none" href="{{ mars.mars_weather_url}}" alt="Mars Wheather" target="_blank">Current Weather on Mars</a></h4>
+            <h4 class="m-3"><a style="color:#212529;" href="{{ mars.mars_weather_url}}" alt="Mars Wheather" target="_blank">Current Weather on Mars</a></h4>
             <p class="text-justify m-3">{{ mars.mars_weather}}</p>
           </div>
           <div class="text-left mt-4" >
-              <h4 >Mars Facts</h4>
+              <h4><a style="color:#212529;" href="{{ mars.mars_facts_url}}" alt="Mars Facts" target="_blank">Mars Facts</a></h4>
               {{ mars.html_table | safe }}
           </div>
         </div>  
       </div>
       <hr style="background-color:#fb8992">
       <div class="container">
-        <h3 class="text-center mt-4">Mars Hemispheres</h3>
+        <h3 class="text-center mt-4"><a style="color:#212529;" href="{{ mars.mars_hemispheres_url}}" alt="Mars Hemispheres" target="_blank">Mars Hemispheres</a></h3>
         <hr>
         <div class="row justify-content-between">
-            {% for item in mars.hemisphere_image_urls %}
+            {% for item in mars.hemisphere_image_url %}
             <div class="col-lg-6 col-12">
               <div class="img-thumbnail mb-4 rounded">
                   <img class="w-100" src="{{item['img_url']}}"  alt="{{item['title']}}">
