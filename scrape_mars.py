@@ -111,7 +111,8 @@ def scrape():
     li = ol.find_all("li")[0]
     div = li.find("div", class_="js-tweet-text-container")
     mars_weather = div.find("p").text + "."
-    json_data["mars_weather"] = mars_weather 
+    json_data["mars_weather"] = mars_weather
+    json_data["mars_weather_url"] = url
 
     # ### Mars Facts
 
