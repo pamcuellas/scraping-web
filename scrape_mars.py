@@ -140,6 +140,7 @@ def scrape():
 
     json_data["html_table"] = html_table
     json_data["mars_facts_url"] = url
+    json_data["mars_hemispheres_url"] = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
 
     # ### Mars Hemispheres
 
@@ -153,8 +154,7 @@ def scrape():
     hemisphere_image_urls.append({"title":"Schiaparelli Hemisphere",    "img_url": "https://astrogeology.usgs.gov/cache/images/3cdd1cbf5e0813bba925c9030d13b62e_schiaparelli_enhanced.tif_full.jpg"}) 
     hemisphere_image_urls.append({"title":"Syrtis Major Hemisphere",    "img_url": "https://astrogeology.usgs.gov/cache/images/ae209b4e408bb6c3e67b6af38168cf28_syrtis_major_enhanced.tif_full.jpg"}) 
     hemisphere_image_urls.append({"title":"Valles Marineris Hemisphere","img_url": "https://astrogeology.usgs.gov/cache/images/7cf2da4bf549ed01c17f206327be4db7_valles_marineris_enhanced.tif_full.jpg"}) 
-    json_data["hemisphere_image_url"] = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
-
+    
     # browser.visit(url)
     # html = browser.html
     # soup = BeautifulSoup(html, "html.parser")
