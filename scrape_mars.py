@@ -88,8 +88,15 @@ def scrape():
     # Mars Image and assign the url string to a variable called featured_image_url.
     # Get the Image URL
 
+
+    random_num = randint(3, 10)
+    counter = 1
+
     for link in soup.find_all('img'):
             featured_image_url = link.get('src')
+            if (counter > 2) and (counter == random_num):
+                break
+            counter += 1
 
     # carousel_item = soup.find('article', class_="carousel_item")['style']
     # featured_image_url = 'https://www.jpl.nasa.gov' + carousel_item.split("'")[1]
