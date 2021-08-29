@@ -20,8 +20,8 @@ def init_browser():
     executable_path = {"executable_path": "/app/.chromedriver/bin/chromedriver"}
     return Browser("chrome", **executable_path, headless=False)
 
-    # executable_path = {"executable_path": "chromedriver.exe"}
-    # return Browser("chrome", **executable_path, headless=False)
+    #  executable_path = {"executable_path": "chromedriver.exe"}
+    #  return Browser("chrome", **executable_path, headless=False)
 
 def scrape():
     browser = init_browser()
@@ -75,7 +75,10 @@ def scrape():
     # In[5]:
 
     # Go to the news page
-    url = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
+    #url = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
+    url = "https://www.jpl.nasa.gov/images/composite-view-of-asteroid-braille-from-deep-space-1"
+    print("#################################### STEP 10")
+
     browser.visit(url)
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
@@ -84,8 +87,12 @@ def scrape():
     # Use splinter to navigate the site and find the image url for the current Featured 
     # Mars Image and assign the url string to a variable called featured_image_url.
     # Get the Image URL
-    carousel_item = soup.find('article', class_="carousel_item")['style']
-    featured_image_url = 'https://www.jpl.nasa.gov' + carousel_item.split("'")[1]
+
+    for link in soup.find_all('img'):
+            featured_image_url = link.get('src')
+
+    # carousel_item = soup.find('article', class_="carousel_item")['style']
+    # featured_image_url = 'https://www.jpl.nasa.gov' + carousel_item.split("'")[1]
 
     # print("The URL is {}".format(featured_image_url))
 
@@ -97,22 +104,22 @@ def scrape():
 
     # Visit the Mars Weather twitter account here (https://twitter.com/marswxreport?lang=en) and scrape the latest 
     # Mars weather tweet from the page. Save the tweet text for the weather report as a variable called mars_weather.
-    url = "https://twitter.com/marswxreport?lang=en"
-    browser.visit(url)
-    html = browser.html
-    soup = BeautifulSoup(html, "html.parser")
+    # url = "https://twitter.com/marswxreport?lang=en"
+    # browser.visit(url)
+    # html = browser.html
+    # soup = BeautifulSoup(html, "html.parser")
 
-    # Remove tag a from tag p (Mars Weather).
-    for a in soup.find_all("a", {'class':'twitter-timeline-link u-hidden'}): 
-        a.decompose()
+    # # Remove tag a from tag p (Mars Weather).
+    # for a in soup.find_all("a", {'class':'twitter-timeline-link u-hidden'}): 
+    #     a.decompose()
 
-    # Get the Mars Weather
-    ol = soup.find("ol", class_="stream-items js-navigable-stream")
-    li = ol.find_all("li")[0]
-    div = li.find("div", class_="js-tweet-text-container")
-    mars_weather = div.find("p").text + "."
-    json_data["mars_weather"] = mars_weather
-    json_data["mars_weather_url"] = url
+    # # Get the Mars Weather
+    # ol = soup.find("ol", class_="stream-items js-navigable-stream")
+    # li = ol.find_all("li")[0]
+    # div = li.find("div", class_="js-tweet-text-container")
+    # mars_weather = div.find("p").text + "."
+    # json_data["mars_weather"] = mars_weather
+    # json_data["mars_weather_url"] = url
 
     # ### Mars Facts
 
