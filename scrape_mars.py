@@ -17,11 +17,11 @@ from random import *
 # In[2]:
 
 def init_browser():
-    # executable_path = {"executable_path": "/app/.chromedriver/bin/chromedriver"}
-    # return Browser("chrome", **executable_path, headless=False)
+    executable_path = {"executable_path": "/app/.chromedriver/bin/chromedriver"}
+    return Browser("chrome", **executable_path, headless=False)
 
-     executable_path = {"executable_path": "chromedriver.exe"}
-     return Browser("chrome", **executable_path, headless=False)
+    #  executable_path = {"executable_path": "chromedriver.exe"}
+    #  return Browser("chrome", **executable_path, headless=False)
 
 def scrape():
     browser = init_browser()
