@@ -17,11 +17,11 @@ from random import *
 # In[2]:
 
 def init_browser():
-    executable_path = {"executable_path": "/app/.chromedriver/bin/chromedriver"}
-    return Browser("chrome", **executable_path, headless=False)
+    # executable_path = {"executable_path": "/app/.chromedriver/bin/chromedriver"}
+    # return Browser("chrome", **executable_path, headless=False)
 
-    #  executable_path = {"executable_path": "chromedriver.exe"}
-    #  return Browser("chrome", **executable_path, headless=False)
+     executable_path = {"executable_path": "chromedriver.exe"}
+     return Browser("chrome", **executable_path, headless=False)
 
 def scrape():
     browser = init_browser()
@@ -111,6 +111,34 @@ def scrape():
 
     # Visit the Mars Weather twitter account here (https://twitter.com/marswxreport?lang=en) and scrape the latest 
     # Mars weather tweet from the page. Save the tweet text for the weather report as a variable called mars_weather.
+    
+    # Unfortunately, Twitter does not have current mars weather anymore.
+    # So, I adjusted to get the last weather from Nasa website.
+    url = "https://mars.nasa.gov/mars2020/weather/"
+    browser.visit(url)
+    html = browser.html
+    soup = BeautifulSoup(html, "html.parser")
+    
+    tbody = soup.find("tbody")
+        
+    # You can find children with multiple tags by passing a list of strings
+    tr = tbody.find_all(['tr'])[1]
+    date = tr.find_all("th")[0] 
+    sol  = tr.find_all("th")[1] 
+    tmax = tr.find_all("td")[0] 
+    tmin = tr.find_all("td")[1] 
+    pres = tr.find_all("td")[2] 
+    rise = tr.find_all("td")[3]    
+    sset = tr.find_all("td")[4]    
+    
+    mars_weather = "Perseverance sol " + sol.text + ", " + date.text 
+    mars_weather = mars_weather + ". Temperature: Max " + tmax.text + ", Min "
+    mars_weather = mars_weather + tmin.text + ". Pressure (Pa) " + pres.text + ", sunrise "
+    mars_weather = mars_weather + rise.text + ", sunset " + sset.text + "."
+
+
+
+
     # url = "https://twitter.com/marswxreport?lang=en"
     # browser.visit(url)
     # html = browser.html
@@ -125,8 +153,8 @@ def scrape():
     # li = ol.find_all("li")[0]
     # div = li.find("div", class_="js-tweet-text-container")
     # mars_weather = div.find("p").text + "."
-    # json_data["mars_weather"] = mars_weather
-    # json_data["mars_weather_url"] = url
+    json_data["mars_weather"] = mars_weather
+    json_data["mars_weather_url"] = url
 
     # ### Mars Facts
 
