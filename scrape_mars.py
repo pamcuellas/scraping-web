@@ -10,21 +10,30 @@
 
 # Import Dependencies
 from splinter import Browser
+from selenium.webdriver.chrome.service import Service
+
+
 from bs4 import BeautifulSoup
 import pandas as pd
 from random import *
 
 # In[2]:
 
-def init_browser():
-    executable_path = {"executable_path": "/app/.chromedriver/bin/chromedriver"}
-    return Browser("chrome", **executable_path, headless=False)
+#def init_browser():
 
-    #  executable_path = {"executable_path": "chromedriver.exe"}
-    #  return Browser("chrome", **executable_path, headless=False)
+    #service = Service()
+    #options = webdriver.ChromeOptions()
+    #return webdriver.Chrome(service=service, options=options)    
+ 
 
 def scrape():
-    browser = init_browser()
+
+    #browser = init_browser()
+   
+    my_service = Service()
+    browser = Browser('chrome', service=my_service)
+   
+       
     json_data = {}
 
     # Scrape the NASA Mars News Site here (https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest)
@@ -33,15 +42,38 @@ def scrape():
 
     url = "https://mars.nasa.gov/news/"
     browser.visit(url)
-    print("#################################### STEP 1")
+    #print("#################################### STEP 1")
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
 
     random_num = randint(0, 39)
     # Get the list of news 
     ul_list_news = soup.find("ul", class_="item_list")
+    
+    
+    i = 1
+    while ul_list_news is None:
+        ul_list_news = soup.find("ul", class_="item_list")
+        if i == 6:
+            break
+        i += 1
+    
+    #print(str(i) + "*****************************************************************************************")
+    
+    
+    #count = 0
+    #for element in ul_list_news:
+    #    count += 1 
+    #    #print(element.get_text())    
+    #    print(str(count) + "******************************************************")
+    
+    
+    
     # Get the random news
     li_random_news = ul_list_news.find_all("li")[random_num]
+    
+    
+    
     # Get the link for the random news.
     link_latest_news = li_random_news.find("a")["href"]
     # print(link_latest_news)
@@ -77,7 +109,7 @@ def scrape():
     # Go to the news page
     #url = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
     url = "https://www.jpl.nasa.gov/images/composite-view-of-asteroid-braille-from-deep-space-1"
-    print("#################################### STEP 10")
+    #print("#################################### STEP 10")
 
     browser.visit(url)
     html = browser.html
@@ -114,12 +146,20 @@ def scrape():
     
     # Unfortunately, Twitter does not have current mars weather anymore.
     # So, I adjusted to get the last weather from Nasa website.
-    url = "https://mars.nasa.gov/mars2020/weather/"
+    url = "https://mars.nasa.gov/mars2020/mission/weather/"
     browser.visit(url)
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
     
     tbody = soup.find("tbody")
+        
+    
+    #for element in tbody:
+    #    print(element.get_text())    
+    #    print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+    
+            
+        
         
     # You can find children with multiple tags by passing a list of strings
     tr = tbody.find_all(['tr'])[1]
