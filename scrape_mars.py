@@ -29,7 +29,7 @@ def scrape():
 
     #browser = init_browser()
        
-    my_service = Service(executable_path='chromedriver.exe')
+    my_service = Service(executable_path='./chromedriver.exe')
     browser = Browser('chrome', service=my_service)   
        
        
