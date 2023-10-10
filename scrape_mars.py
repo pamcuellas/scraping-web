@@ -12,7 +12,6 @@
 from splinter import Browser
 from selenium.webdriver.chrome.service import Service
 
-
 from bs4 import BeautifulSoup
 import pandas as pd
 from random import *
@@ -29,10 +28,10 @@ from random import *
 def scrape():
 
     #browser = init_browser()
-   
-    my_service = Service()
-    browser = Browser('chrome', service=my_service)
-   
+       
+    my_service = Service(executable_path='chromedriver.exe')
+    browser = Browser('chrome', service=my_service)   
+       
        
     json_data = {}
 
